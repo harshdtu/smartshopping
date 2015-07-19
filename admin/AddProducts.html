@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+	<script src="../js/jquery.geolocation.js"></script>
+	<script src="../js/locationpicker.jquery.js"></script>
+	<script src="../js/ProcessBarcode.js"></script> -->
+	<link href="../assets/css/bootstrap.css" rel="stylesheet"/>
+	<script>
+		$(document).ready(function() {
+			$('#submit').click( function() {
+				var url = "https://api-us.clusterpoint.com/100627/smartshoppee.json"
+				var code = $('#code').val();
+				var imgurl = $('#imgurl').val();
+				var name = $('#name').val();
+				var desc = $('#desc').val();
+				var price = $('#price').val();
+				var productData = {
+					"id": new Date(),
+					"code": code,
+					"imgurl": imgurl,
+					"name": name,
+					"desc": desc,
+					"price": price
+				};
+				
+				var settings = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://api-us.clusterpoint.com/100627/smartshoppee/prod001.json",
+					"method": "GET",
+					"headers": {
+						"authorization": "Basic c2hhY2hpbmRyYTkyQGxpdmUuY29tOnNhY2hpbi4xOTky"
+					}
+				}
+
+				$.ajax(settings).done(function (response) {
+					console.log(response);
+				});
+
+				
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="navbar-main"> 
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header" >
+	        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+	        <a class="navbar-brand" href="#home" style="padding-top: 5px"><img class=" img-circle" src="../photos/folio01.jpg" width="50px" ; height="40px "></a> 
+	        <a class="navbar-brand" href="#home" style="padding-top: 15px ; font-size: 20px ; padding-left: 2px ; color: white">DANIEL</a>
+       </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#home" class="smoothScroll">Home</a></li>
+          <li> <a href="#about" class="smoothScroll"> About</a></li>
+          <li> <a href="#services" class="smoothScroll"> Services</a></li>
+          <li> <a href="#team" class="smoothScroll"> Team</a></li>
+          <li> <a href="#contact" class="smoothScroll"> Contact</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse --> 
+    </div>
+  </div>
+</div>
+
+
+
+
+	<div class="container">
+		<form class="form-signin" style="margin-top: 160px">
+			<h2 class="form-signin-heading" style="margin-bottom: 40px">Enter the Details of the Products</h2>
+			<input class="form-control" type="text" required id="code" name="code" placeholder="Barcode Number" style="margin: 5px 0px ">
+			<input class="form-control" type="text" required id="imgurl" name="imgurl" placeholder="Image URL" style="margin: 5px 0px ">
+			<input class="form-control" type="text" required id="name" name="name" placeholder="Product Name" style="margin: 5px 0px ">
+			<input class="form-control" type="text" required id="desc" name="desc" placeholder="Description" style="margin: 5px 0px ">
+			<input class="form-control" type="text" required id="price" name="price" placeholder="Price" style="margin: 5px 0px ">
+			<button class="btn btn-lg btn-primary btn-block" id="submit" style="width: 100% ; margin-top: 30px">Add Product</button>
+		</form>
+	</div>
+	<div id="return-callback">
+	</div>
+</body>
+</html>
+
+
